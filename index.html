@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perpustakaan Galvaza — Beranda Utama</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600;6..72,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-canvas: #faf7f0;
+        --bg-surface: #ffffff;
+        --ink-primary: #16201d;
+        --ink-secondary: #334155;
+        --border-subtle: #dcd5c7;
+        --quran-surface: #e9f4ee;
+        --quran-border: #a9d0bb;
+        --quran-primary: #14532d;
+        --quran-primary-hover: #0e3d21;
+        --english-surface: #fff5e6;
+        --english-border: #efc78e;
+        --english-primary: #9a3412;
+        --english-primary-hover: #7c2d12;
+        --radius-card: 24px;
+        --radius-control: 12px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        background-color: var(--bg-canvas);
+        color: var(--ink-primary);
+        font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a,
+      button {
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--quran-primary);
+        outline-offset: 2px;
+      }
+
+      .english-focus:focus-visible {
+        outline: 3px solid var(--english-primary);
+        outline-offset: 2px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      @media (min-width: 640px) {
+        .container {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+
+      /* Header & Navigasi */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background-color: rgba(250, 247, 240, 0.94);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 68px;
+      }
+
+      .brand-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 44px;
+        text-decoration: none;
+        color: var(--ink-primary);
+        border-radius: var(--radius-control);
+        padding-right: 8px;
+      }
+
+      .brand-mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-control);
+        background-color: var(--quran-primary);
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        flex-shrink: 0;
+      }
+
+      .brand-title {
+        font-weight: 800;
+        font-size: 16px;
+        letter-spacing: -0.01em;
+      }
+
+      .desktop-nav {
+        display: none;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .desktop-nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 14px;
+        border-radius: var(--radius-control);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink-primary);
+        transition: background-color 160ms ease, color 160ms ease;
+      }
+
+      .desktop-nav a:hover {
+        background-color: #efe9dc;
+        color: var(--quran-primary);
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0 14px;
+        border-radius: var(--radius-control);
+        border: 1px solid #c9c0b0;
+        background-color: var(--bg-surface);
+        color: var(--ink-primary);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .mobile-nav {
+        border-top: 1px solid var(--border-subtle);
+        background-color: var(--bg-canvas);
+        padding: 12px 16px 16px;
+      }
+
+      .mobile-nav[hidden] {
+        display: none;
+      }
+
+      .mobile-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .mobile-nav a {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 14px;
+        border-radius: var(--radius-control);
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ink-primary);
+      }
+
+      .mobile-nav a:hover {
+        background-color: #efe9dc;
+      }
+
+      @media (min-width: 768px) {
+        .desktop-nav {
+          display: flex;
+        }
+
+        .menu-toggle,
+        .mobile-nav {
+          display: none !important;
+        }
+      }
+
+      /* Pembuka Beranda */
+      .hero-section {
+        padding-top: 48px;
+        padding-bottom: 36px;
+      }
+
+      @media (min-width: 640px) {
+        .hero-section {
+          padding-top: 72px;
+          padding-bottom: 48px;
+        }
+      }
+
+      .hero-box {
+        max-width: 780px;
+      }
+
+      .hero-title {
+        margin: 0;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: var(--ink-primary);
+      }
+
+      @media (min-width: 640px) {
+        .hero-title {
+          font-size: 52px;
+        }
+      }
+
+      .hero-lead {
+        margin: 18px 0 0;
+        max-width: 640px;
+        font-size: 17px;
+        line-height: 1.65;
+        color: var(--ink-secondary);
+      }
+
+      /* Gerbang Dua Ruang Terpisah */
+      .gateways-section {
+        padding-bottom: 64px;
+      }
+
+      @media (min-width: 640px) {
+        .gateways-section {
+          padding-bottom: 84px;
+        }
+      }
+
+      .gateways-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      @media (min-width: 960px) {
+        .gateways-grid {
+          grid-template-columns: 7fr 5fr;
+          gap: 28px;
+          align-items: stretch;
+        }
+      }
+
+      .gateway-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: var(--radius-card);
+        padding: 28px;
+        box-shadow: 0 2px 10px rgba(22, 32, 29, 0.04);
+      }
+
+      @media (min-width: 640px) {
+        .gateway-card {
+          padding: 36px;
+        }
+      }
+
+      .gateway-quran {
+        background-color: var(--quran-surface);
+        border: 1.5px solid var(--quran-border);
+      }
+
+      .gateway-english {
+        background-color: var(--english-surface);
+        border: 1.5px solid var(--english-border);
+      }
+
+      .gateway-heading {
+        margin: 0;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      @media (min-width: 640px) {
+        .gateway-heading {
+          font-size: 34px;
+        }
+      }
+
+      .gateway-quran .gateway-heading {
+        color: var(--quran-primary);
+      }
+
+      .gateway-english .gateway-heading {
+        color: var(--english-primary);
+      }
+
+      .gateway-desc {
+        margin: 14px 0 0;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--ink-secondary);
+        max-width: 52ch;
+      }
+
+      .gateway-actions {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .btn-gateway {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 24px;
+        border-radius: var(--radius-control);
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 700;
+        color: #ffffff;
+        transition: background-color 160ms ease, transform 140ms ease;
+      }
+
+      .btn-gateway:active {
+        transform: scale(0.98);
+      }
+
+      .btn-quran {
+        background-color: var(--quran-primary);
+      }
+
+      .btn-quran:hover {
+        background-color: var(--quran-primary-hover);
+      }
+
+      .btn-english {
+        background-color: var(--english-primary);
+      }
+
+      .btn-english:hover {
+        background-color: var(--english-primary-hover);
+      }
+
+      .gateway-status {
+        font-size: 14px;
+        font-weight: 600;
+        min-height: 20px;
+      }
+
+      .gateway-quran .gateway-status {
+        color: var(--quran-primary);
+      }
+
+      .gateway-english .gateway-status {
+        color: var(--english-primary);
+      }
+
+      /* Catatan Pemisahan Beranda */
+      .boundary-section {
+        border-top: 1px solid var(--border-subtle);
+        background-color: var(--bg-surface);
+        padding-top: 48px;
+        padding-bottom: 56px;
+      }
+
+      .boundary-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      @media (min-width: 768px) {
+        .boundary-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 40px;
+        }
+      }
+
+      .boundary-title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--ink-primary);
+      }
+
+      .boundary-text {
+        margin: 8px 0 0;
+        font-size: 15px;
+        line-height: 1.65;
+        color: var(--ink-secondary);
+        max-width: 58ch;
+      }
+
+      /* Footer */
+      .site-footer {
+        border-top: 1px solid var(--border-subtle);
+        background-color: var(--bg-canvas);
+        padding-top: 28px;
+        padding-bottom: 32px;
+      }
+
+      .footer-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      @media (min-width: 640px) {
+        .footer-inner {
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+
+      .footer-copy {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink-primary);
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink-secondary);
+      }
+
+      .footer-links a:hover {
+        color: var(--ink-primary);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .btn-gateway,
+        .desktop-nav a {
+          transition: none;
+        }
+
+        .btn-gateway:active {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#beranda-utama" class="brand-link">
+          <span class="brand-mark" aria-hidden="true">PG</span>
+          <span class="brand-title">Perpustakaan Galvaza</span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Navigasi beranda utama">
+          <a href="#pilihan-ruang">Pilihan Ruang</a>
+          <a href="#aturan-pemisahan">Pemisahan Ruang</a>
+        </nav>
+
+        <button
+          type="button"
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          aria-label="Buka atau tutup menu navigasi"
+        >
+          Menu
+        </button>
+      </div>
+
+      <nav id="mobile-nav" class="mobile-nav" aria-label="Navigasi mobile" hidden>
+        <div class="mobile-nav-list">
+          <a href="#pilihan-ruang">Pilihan Ruang</a>
+          <a href="#aturan-pemisahan">Pemisahan Ruang</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="beranda-utama">
+      <section class="container hero-section">
+        <div class="hero-box">
+          <h1 class="hero-title">
+            Perpustakaan Galvaza: Beranda Utama untuk Ruang Belajar Terpisah
+          </h1>
+          <p class="hero-lead">
+            Halaman ini menjadi beranda utama untuk memisahkan ruang belajar
+            Quran dan ruang belajar Bahasa Inggris sejak awal. Pilih ruang yang
+            ingin Anda buka sesuai sesi pembelajaran.
+          </p>
+        </div>
+      </section>
+
+      <section
+        id="pilihan-ruang"
+        class="container gateways-section"
+        aria-label="Pilihan ruang belajar utama"
+      >
+        <div class="gateways-grid">
+          <article class="gateway-card gateway-quran">
+            <div>
+              <h2 class="gateway-heading">Ruang Quran</h2>
+              <p class="gateway-desc">
+                Pintu masuk terpisah menuju lingkungan belajar Quran dengan
+                suasana yang tenang dan terstruktur.
+              </p>
+            </div>
+            <div class="gateway-actions">
+              <a
+                href="/quran"
+                class="btn-gateway btn-quran"
+                data-gateway="quran"
+              >
+                Buka Ruang Quran
+              </a>
+              <span
+                id="status-quran"
+                class="gateway-status"
+                role="status"
+                aria-live="polite"
+              ></span>
+            </div>
+          </article>
+
+          <article class="gateway-card gateway-english">
+            <div>
+              <h2 class="gateway-heading">Ruang Bahasa Inggris</h2>
+              <p class="gateway-desc">
+                Pintu masuk terpisah menuju lingkungan belajar Bahasa Inggris
+                yang aktif dan penuh permainan.
+              </p>
+            </div>
+            <div class="gateway-actions">
+              <a
+                href="/english"
+                class="btn-gateway btn-english english-focus"
+                data-gateway="english"
+              >
+                Buka Ruang Bahasa Inggris
+              </a>
+              <span
+                id="status-english"
+                class="gateway-status"
+                role="status"
+                aria-live="polite"
+              ></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="aturan-pemisahan" class="boundary-section">
+        <div class="container boundary-grid">
+          <div>
+            <h2 class="boundary-title">Beranda Tetap Fokus sebagai Gerbang</h2>
+            <p class="boundary-text">
+              Halaman utama Perpustakaan Galvaza hanya mengarahkan pengguna ke
+              ruang yang dipilih. Materi dan aktivitas masing-masing mata
+              pelajaran berada di jalur ruangnya sendiri.
+            </p>
+          </div>
+          <div>
+            <h2 class="boundary-title">Identitas Terpisah Sejak Awal</h2>
+            <p class="boundary-text">
+              Warna, ritme, dan navigasi setiap ruang dipisahkan agar tidak
+              saling tumpang tindih ketika digunakan oleh siswa maupun guru.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-copy">Perpustakaan Galvaza</p>
+        <div class="footer-links">
+          <a href="/quran">Ruang Quran</a>
+          <a href="/english" class="english-focus">Ruang Bahasa Inggris</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const toggleBtn = document.querySelector(".menu-toggle");
+        const mobileNav = document.getElementById("mobile-nav");
+        const mobileLinks = mobileNav
+          ? mobileNav.querySelectorAll("a")
+          : [];
+        const gatewayLinks = document.querySelectorAll("[data-gateway]");
+
+        function setMenuState(isOpen) {
+          if (!toggleBtn || !mobileNav) return;
+          toggleBtn.setAttribute("aria-expanded", String(isOpen));
+          mobileNav.hidden = !isOpen;
+        }
+
+        if (toggleBtn && mobileNav) {
+          toggleBtn.addEventListener("click", function () {
+            const currentlyExpanded =
+              toggleBtn.getAttribute("aria-expanded") === "true";
+            setMenuState(!currentlyExpanded);
+          });
+
+          mobileLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+              setMenuState(false);
+            });
+          });
+
+          document.addEventListener("keydown", function (event) {
+            if (
+              event.key === "Escape" &&
+              toggleBtn.getAttribute("aria-expanded") === "true"
+            ) {
+              setMenuState(false);
+              toggleBtn.focus();
+            }
+          });
+        }
+
+        gatewayLinks.forEach(function (link) {
+          link.addEventListener("click", function () {
+            const target = link.getAttribute("data-gateway");
+            const quranStatus = document.getElementById("status-quran");
+            const englishStatus = document.getElementById("status-english");
+
+            if (quranStatus) quranStatus.textContent = "";
+            if (englishStatus) englishStatus.textContent = "";
+
+            if (target === "quran" && quranStatus) {
+              quranStatus.textContent = "Menuju jalur /quran";
+            } else if (target === "english" && englishStatus) {
+              englishStatus.textContent = "Menuju jalur /english";
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
